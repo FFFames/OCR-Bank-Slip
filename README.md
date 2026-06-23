@@ -1,69 +1,100 @@
 # OCR Bank
 
-A full-stack web application for mobile bank receipt processing with OCR, review interface, database storage, Google Sheets export, and RAG-powered chatbot.
+<!-- PROJECT SHIELDS -->
+[![Python Version][python-image]][python-url]
+[![Node Version][node-image]][node-url]
+[![License: MIT][license-image]][license-url]
 
-## Features
+A full-stack web application for automated mobile bank receipt processing using OCR technology. Built with Thai language support, it features intelligent text extraction, a review interface, database storage, Google Sheets integration, and a RAG-powered AI chatbot for querying receipt data.
 
-- **OCR Processing**: Extract text from Thai bank receipts using PaddleOCR
-- **Review Interface**: View and edit OCR results before saving
-- **Batch Upload**: Process multiple receipts at once
-- **Database Storage**: Store receipts in PostgreSQL
-- **Google Sheets Export**: Export receipt data to Google Sheets
-- **RAG Chatbot**: Query receipt data using AI with semantic search
-- **Analytics Dashboard**: Visualize spending patterns and insights
+## 🚀 Features
 
-## Tech Stack
+- **📷 Smart OCR Processing** - Extract text from Thai bank receipts using PaddleOCR with multi-language support
+- **✍️ Review Interface** - User-friendly interface to view, edit, and validate OCR results before saving
+- **📦 Batch Upload** - Process multiple receipts simultaneously for efficient workflow
+- **💾 Persistent Storage** - Store receipts in PostgreSQL with full CRUD operations
+- **📊 Google Sheets Export** - Seamlessly export receipt data to Google Sheets for further analysis
+- **🤖 RAG Chatbot** - AI-powered chatbot using semantic search to query your receipt data naturally
+- **📈 Analytics Dashboard** - Visualize spending patterns and financial insights with interactive charts
 
-### Frontend
-- React 18 + TypeScript
-- Vite (build tool)
-- React Router (routing)
-- Axios (HTTP client)
-- Tailwind CSS (styling)
-- Recharts (data visualization)
-- React Hook Form (forms)
-- Zod (validation)
+## 🏗️ Tech Stack
 
 ### Backend
-- Python 3.10+ / FastAPI
-- PostgreSQL (database)
-- SQLAlchemy (ORM)
-- Alembic (migrations)
-- PaddleOCR (Thai language OCR)
-- ChromaDB (vector store for RAG)
-- Google Generative AI SDK (Gemini)
-- Google Sheets API (export)
+- **Framework**: FastAPI - Modern, fast Python web framework
+- **Database**: PostgreSQL with SQLAlchemy ORM
+- **Migrations**: Alembic for database version control
+- **OCR**: PaddleOCR (Thai language optimized)
+- **Vector Store**: ChromaDB for semantic search
+- **LLM**: Google Generative AI (Gemini) / Groq / Local LM Studio support
+- **Integration**: Google Sheets API
 
-## Quick Start
+### Frontend
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite for lightning-fast development
+- **Routing**: React Router v6
+- **HTTP Client**: Axios for API communication
+- **State Management**: React Query for server state
+- **Styling**: Tailwind CSS for modern UI
+- **Forms**: React Hook Form with Zod validation
+- **Charts**: Recharts for data visualization
+- **Icons**: Lucide React
+
+## 📸 Screenshots
+
+<!-- Add screenshots here when available -->
+
+## 🛠️ Installation
 
 ### Prerequisites
 
-- Python 3.10 or higher
-- Node.js 18 or higher
-- Docker and Docker Compose
-- Google Cloud account (for Gemini API and Google Sheets)
+Ensure you have the following installed:
+- **Python 3.10+** - [Download here](https://www.python.org/downloads/)
+- **Node.js 18+** - [Download here](https://nodejs.org/)
+- **Docker & Docker Compose** - [Download here](https://www.docker.com/get-started/)
+- **Git** - [Download here](https://git-scm.com/downloads)
 
-### 1. Clone the Repository
+### Quick Start with Setup Script
+
+We've provided a convenient setup script to get you started quickly:
 
 ```bash
-cd ocr-bank2
+# Clone the repository
+git clone https://github.com/yourusername/ocr-bank.git
+cd ocr-bank
+
+# Run the setup script
+./setup.sh
 ```
 
-### 2. Backend Setup
+The setup script will:
+1. Check for prerequisites
+2. Set up Python virtual environment
+3. Install backend dependencies
+4. Install frontend dependencies
+5. Create environment files from templates
+6. Start PostgreSQL with Docker
+7. Run database migrations
+8. Launch both backend and frontend servers
+
+### Manual Installation
+
+If you prefer manual setup or the script doesn't work:
+
+#### 1. Backend Setup
 
 ```bash
 cd backend
 
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\\Scripts\\activate
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Configure environment
 cp .env.example .env
-# Edit .env with your configuration (see below)
+# Edit .env with your configuration
 
 # Start PostgreSQL
 docker compose up -d
@@ -71,17 +102,16 @@ docker compose up -d
 # Run database migrations
 alembic upgrade head
 
-# Start the server
-uvicorn app.main:app --reload
+# Start the backend server
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-The API will be available at `http://localhost:8000`
+The API will be available at:
+- **API**: `http://localhost:8000`
+- **Swagger UI**: `http://localhost:8000/docs`
+- **ReDoc**: `http://localhost:8000/redoc`
 
-API Documentation:
-- Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
-
-### 3. Frontend Setup
+#### 2. Frontend Setup
 
 ```bash
 cd frontend
@@ -91,7 +121,7 @@ npm install
 
 # Configure environment
 cp .env.example .env
-# The default configuration should work for local development
+# The default configuration works for local development
 
 # Start development server
 npm run dev
@@ -99,125 +129,113 @@ npm run dev
 
 The application will be available at `http://localhost:5173`
 
-## Configuration
+## ⚙️ Configuration
 
-### Backend Environment Variables (.env)
+### Backend Environment Variables
+
+Create a `.env` file in the `backend` directory with the following variables:
 
 ```bash
 # Database
 DATABASE_URL=postgresql://ocr_bank_user:ocr_bank_password@localhost:5432/ocr_bank
 
 # OCR
-OCR_LANGUAGE=th  # Thai language
-OCR_DEVICE=cpu   # or gpu if available
+OCR_LANGUAGE=th
+OCR_DEVICE=cpu
 
-# LLM (Primary: Gemini)
-GEMINI_API_KEY=your_gemini_api_key
+# LLM (Required for chatbot)
+GEMINI_API_KEY=your_gemini_api_key_here
 LLM_PROVIDER=gemini
-
-# LLM (Local: LM Studio)
-LOCAL_LLM_URL=http://localhost:1234/v1
 
 # Vector Store
 CHROMADB_PERSIST_DIRECTORY=./data/chromadb
 
-# Google Sheets
+# Google Sheets (Optional)
 GOOGLE_SHEETS_CREDENTIALS_PATH=./config/credentials.json
-GOOGLE_SHEETS_SPREADSHEET_ID=your_spreadsheet_id
+GOOGLE_SHEETS_SPREADSHEET_ID=your_spreadsheet_id_here
 
 # File Storage
 IMAGE_STORAGE_PATH=./images
-MAX_UPLOAD_SIZE=10485760  # 10MB
+MAX_UPLOAD_SIZE=10485760
 ```
 
-### Frontend Environment Variables (.env)
+### Frontend Environment Variables
+
+Create a `.env` file in the `frontend` directory:
 
 ```bash
 VITE_API_BASE_URL=http://localhost:8000/api
 ```
 
-## Project Structure
+## 📖 API Documentation
+
+### Upload & OCR
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/upload/` | POST | Upload receipt images (batch) |
+| `/api/upload/process-ocr/{id}` | POST | Re-process OCR for a receipt |
+
+### Receipts
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/receipts/` | GET | List receipts (with filters) |
+| `/api/receipts/{id}` | GET | Get receipt details |
+| `/api/receipts/{id}` | PUT | Update receipt |
+| `/api/receipts/{id}/confirm` | POST | Mark as confirmed |
+| `/api/receipts/{id}` | DELETE | Delete receipt |
+| `/api/receipts/stats/overview` | GET | Get statistics |
+
+### Chatbot (RAG)
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/chat/query` | POST | Query receipts using AI |
+
+For detailed API documentation with request/response schemas, visit the Swagger UI at `http://localhost:8000/docs` when the backend is running.
+
+## 🏁 Project Structure
 
 ```
-ocr-bank2/
+ocr-bank/
 ├── backend/
 │   ├── app/
-│   │   ├── main.py                 # FastAPI application
-│   │   ├── config.py               # Configuration
-│   │   ├── api/                    # API routes
-│   │   │   ├── upload.py           # Upload endpoints
-│   │   │   ├── receipts.py         # Receipt CRUD
-│   │   │   ├── chat.py             # RAG chat (coming soon)
-│   │   │   ├── export.py           # Export (coming soon)
-│   │   │   └── analytics.py        # Analytics (coming soon)
-│   │   ├── models/                 # Database models
-│   │   ├── schemas/                # Pydantic schemas
-│   │   ├── services/               # Business logic
+│   │   ├── main.py                 # FastAPI application entry point
+│   │   ├── config.py               # Application configuration
+│   │   ├── api/                    # API route handlers
+│   │   │   ├── upload.py           # File upload endpoints
+│   │   │   ├── receipts.py         # Receipt CRUD operations
+│   │   │   ├── chat.py             # RAG chatbot endpoints
+│   │   │   ├── export.py           # Google Sheets export
+│   │   │   └── ...
+│   │   ├── models/                 # SQLAlchemy database models
+│   │   ├── schemas/                # Pydantic validation schemas
+│   │   ├── services/               # Business logic layer
 │   │   │   ├── ocr_service.py      # PaddleOCR wrapper
-│   │   │   ├── rag_service.py      # RAG (coming soon)
-│   │   │   └── export_service.py   # Google Sheets (coming soon)
+│   │   │   ├── rag_service.py      # RAG implementation
+│   │   │   └── export_service.py   # Google Sheets integration
 │   │   └── database/               # Database configuration
-│   ├── requirements.txt
-│   ├── alembic.ini
-│   └── docker-compose.yml
-│
+│   ├── requirements.txt            # Python dependencies
+│   ├── alembic.ini                 # Database migration config
+│   └── docker-compose.yml          # PostgreSQL container
 ├── frontend/
 │   ├── src/
 │   │   ├── pages/                  # Page components
-│   │   │   ├── Dashboard.tsx
-│   │   │   ├── Upload.tsx          # Upload page (coming soon)
-│   │   │   ├── Review.tsx          # Review page (coming soon)
-│   │   │   ├── Receipts.tsx        # Receipt list (coming soon)
-│   │   │   ├── Chat.tsx            # Chatbot (coming soon)
-│   │   │   └── Analytics.tsx       # Analytics (coming soon)
-│   │   ├── components/             # Reusable components
+│   │   ├── components/             # Reusable UI components
 │   │   ├── services/               # API service layer
-│   │   ├── types/                  # TypeScript types
+│   │   ├── types/                  # TypeScript type definitions
 │   │   └── utils/                  # Utility functions
-│   ├── package.json
-│   └── vite.config.ts
-│
-└── README.md
+│   ├── package.json                # Node dependencies
+│   └── vite.config.ts             # Vite configuration
+├── docs/                           # Additional documentation
+├── .gitignore                      # Git ignore rules
+├── docker-compose.yml              # Development services
+├── setup.sh                        # Quick setup script
+└── README.md                       # This file
 ```
 
-## Current Implementation Status
-
-### ✅ Completed
-- Backend FastAPI project structure
-- PostgreSQL database setup with Docker
-- Database models and Alembic migrations
-- PaddleOCR service with Thai language support
-- Upload and receipt API endpoints
-- Frontend React + TypeScript setup with Vite
-- Basic routing and navigation
-- TypeScript types and API service layer
-
-### 🚧 In Progress
-- Upload page with drag-and-drop
-- Review page with image viewer
-- Receipt list page
-
-### 📋 Planned
-- RAG service with LLM interface
-- Chatbot interface
-- Google Sheets export
-- Analytics dashboard
-
-## API Endpoints
-
-### Upload & OCR
-- `POST /api/upload/` - Upload receipt images (batch)
-- `POST /api/upload/process-ocr/{id}` - Re-process OCR for receipt
-
-### Receipts
-- `GET /api/receipts/` - List receipts (with filters and pagination)
-- `GET /api/receipts/{id}` - Get receipt details
-- `PUT /api/receipts/{id}` - Update receipt
-- `POST /api/receipts/{id}/confirm` - Mark as confirmed
-- `DELETE /api/receipts/{id}` - Delete receipt
-- `GET /api/receipts/stats/overview` - Get statistics
-
-## Development
+## 🧪 Development
 
 ### Running Tests
 
@@ -251,40 +269,113 @@ alembic upgrade head
 alembic downgrade -1
 ```
 
-## Troubleshooting
+### Adding New OCR Templates
+
+OCR templates are defined in YAML format in `backend/app/templates/`. To add support for a new bank:
+
+1. Create a new YAML file following the template structure
+2. Define detection zones for key fields (amount, date, sender, receiver)
+3. Add the template configuration
+4. Test with sample receipts
+
+## 🔧 Troubleshooting
 
 ### PostgreSQL Connection Issues
+
 ```bash
 # Check if PostgreSQL container is running
 docker compose ps
 
 # Restart PostgreSQL
-docker compose restart
+docker compose restart postgres
 
 # View logs
 docker compose logs postgres
 ```
 
 ### PaddleOCR Issues
-```bash
-# PaddleOCR will download models on first run
-# Make sure you have internet connection
-# Models will be cached in ~/.paddleocr/
 
-# For GPU support, install CUDA and change OCR_DEVICE=gpu in .env
+```bash
+# PaddleOCR downloads models on first run
+# Make sure you have internet connection
+# Models are cached in ~/.paddleocr/
+
+# For GPU support, install CUDA and set OCR_DEVICE=gpu in .env
 ```
 
 ### Frontend Build Issues
+
 ```bash
 # Clear node_modules and reinstall
 rm -rf node_modules package-lock.json
 npm install
 ```
 
-## License
+### Port Already in Use
 
-This project is for educational purposes.
+```bash
+# Find process using port 8000
+lsof -i :8000
+# Kill the process
+kill -9 <PID>
+```
 
-## Contributing
+## 🗺️ Roadmap
 
-This is a student project. Feel free to fork and modify for your own use.
+- ✅ Backend FastAPI project structure
+- ✅ PostgreSQL database setup
+- ✅ PaddleOCR service with Thai support
+- ✅ Upload and receipt API endpoints
+- ✅ React + TypeScript frontend setup
+- 🚧 Upload page with drag-and-drop
+- 🚧 Review page with image viewer
+- 🚧 Receipt list page
+- 📋 RAG service with LLM interface
+- 📋 Chatbot interface
+- 📋 Google Sheets export
+- 📋 Analytics dashboard
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Your Name**
+- Portfolio: [Your Portfolio Link]
+- GitHub: [@yourusername](https://github.com/yourusername)
+- LinkedIn: [Your LinkedIn]
+
+## 🙏 Acknowledgments
+
+- [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) for excellent OCR capabilities
+- [FastAPI](https://fastapi.tiangolo.com/) for the amazing web framework
+- [ChromaDB](https://www.trychroma.com/) for the vector database
+- [Google Generative AI](https://ai.google.dev/) for LLM capabilities
+
+## 📞 Support
+
+If you have any questions or need help, please:
+- Open an issue on GitHub
+- Contact: your.email@example.com
+
+<!-- BADGE LINKS -->
+
+[python-image]: https://img.shields.io/badge/python-3.10+-blue.svg
+[python-url]: https://www.python.org/downloads/
+[node-image]: https://img.shields.io/badge/node-18+-green.svg
+[node-url]: https://nodejs.org/
+[license-image]: https://img.shields.io/badge/license-MIT-purple.svg
+[license-url]: LICENSE

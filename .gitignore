@@ -1,4 +1,10 @@
+# ============================================
+# OCR Bank - Git Ignore Configuration
+# ============================================
+
+# --------------------------------------------
 # Python
+# --------------------------------------------
 __pycache__/
 *.py[cod]
 *$py.class
@@ -10,57 +16,118 @@ ENV/
 *.egg-info/
 dist/
 build/
+*.pyc
+*.pyo
 
-# Node
+# --------------------------------------------
+# Node / Frontend
+# --------------------------------------------
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+.next/
+out/
 
-# Environment
+# --------------------------------------------
+# Environment Variables (IMPORTANT!)
+# --------------------------------------------
 .env
 .env.local
 .env.*.local
+.env.production
 
-# IDE
+# --------------------------------------------
+# IDE & Editors
+# --------------------------------------------
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-
-# OS
 .DS_Store
 Thumbs.db
+*.sublime-*
+.spyderproject
+.spyproject
 
-# Logs
+# --------------------------------------------
+# Logs & Temporary Files
+# --------------------------------------------
 *.log
 logs/
+*.pid
+*.seed
+*.pid.lock
+*.pid.*
 
-# Database
+# --------------------------------------------
+# Database Files
+# --------------------------------------------
 *.db
 *.sqlite3
+*.sqlite
 
-# Uploads and images
+# --------------------------------------------
+# Uploads & User Data (IMPORTANT!)
+# --------------------------------------------
 backend/uploads/*
 backend/images/*
+backend/backend/images/*
 !backend/uploads/.gitkeep
 !backend/images/.gitkeep
 
-# Vector store
+# --------------------------------------------
+# Vector Store & AI Models
+# --------------------------------------------
 backend/data/chromadb/*
+*.paddleocr
+*.onnx
 
-# Google Sheets credentials
+# --------------------------------------------
+# Credentials & Secrets (IMPORTANT!)
+# --------------------------------------------
 backend/config/credentials.json
+*secret*.json
+*credentials*.json
+*.pem
+*.key
 
-# Build output
+# --------------------------------------------
+# Build Output
+# --------------------------------------------
 frontend/dist/
 frontend/build/
+*.tsbuildinfo
 
-# Alembic
-*.pyc
-
-# Git worktrees (isolated development)
+# --------------------------------------------
+# Git Worktrees (isolated development)
+# --------------------------------------------
 .worktrees/
 worktrees/
+
+# --------------------------------------------
+# Claude Code
+# --------------------------------------------
+.claude/settings.local.json
+
+# --------------------------------------------
+# Qodo (Code Review)
+# --------------------------------------------
+.qodo/
+
+# --------------------------------------------
+# Railway (Deployment)
+# --------------------------------------------
+.railway/
+
+# --------------------------------------------
+# Debug Files
+# --------------------------------------------
+debug_*.jpg
+debug_*.png
+debug_*.log
+server.log
+server.pid
+backend.log

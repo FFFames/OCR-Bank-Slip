@@ -1,1 +1,65 @@
 config/credentials.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyo
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+*.pyc
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs & Temporary Files
+*.log
+logs/
+*.pid
+server.pid
+server.log
+backend.log
+debug_*.jpg
+debug_*.png
+
+# Database
+*.db
+*.sqlite3
+*.sqlite
+
+# Uploads & User Data
+uploads/*
+images/*
+backend/images/*
+!uploads/.gitkeep
+!images/.gitkeep
+
+# Vector Store & AI Models
+data/chromadb/*
+*.paddleocr
+*.onnx
+
+# Credentials & Secrets
+*secret*.json
+*credentials*.json
+*.pem
+*.key
+
+# Alembic
+
