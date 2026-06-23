@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     database_url: str = "postgresql://ocr_bank_user:ocr_bank_password@localhost:5432/ocr_bank"
 
     # VLM (Vision Language Model for OCR)
-    vlm_provider: Literal["groq", "lm_studio"] = "groq"
+    vlm_provider: Literal["groq", "lm_studio", "gemini"] = "groq"
 
     # OCR Engine
     ocr_engine: Literal["tesseract", "paddleocr"] = "paddleocr"
@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     # LLM
     gemini_api_key: str = ""
     groq_api_key: str = ""
-    llm_provider: Literal["gemini", "local_gemma"] = "gemini"
+    llm_provider: Literal["gemini", "groq", "local_gemma"] = "gemini"
     local_llm_url: str = "http://localhost:1234/v1"
 
     # Vector Store

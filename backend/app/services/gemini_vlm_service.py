@@ -19,8 +19,8 @@ class GeminiVLMService:
         # Configure Gemini API
         genai.configure(api_key=settings.gemini_api_key)
         # Use Gemini 1.5 Flash which has vision capabilities
-        self.model = genai.GenerativeModel('gemini-3.1-flash-lite-preview')
-        print("✅ GeminiVLMService initialized with Gemini 3.1 Flash Lite")
+        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        print("✅ GeminiVLMService initialized with Gemini 2.0 Flash")
 
     def _encode_image(self, image_path: str) -> str:
         """Encode image to base64."""
