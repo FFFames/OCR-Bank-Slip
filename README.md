@@ -131,41 +131,117 @@ The application will be available at `http://localhost:5173`
 
 ## ⚙️ Configuration
 
+### 📝 Getting API Keys
+
+Before configuring, you'll need to get API keys:
+
+#### Gemini API Key (Required for AI features)
+1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Sign in with your Google account
+3. Click "Create API Key"
+4. Copy your API key
+
+#### Groq API Key (Alternative LLM provider)
+1. Go to [Groq Console](https://console.groq.com/keys)
+2. Sign up or log in
+3. Create a new API key
+4. Copy your API key
+
+#### Google Sheets (Optional)
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project
+3. Enable Google Sheets API
+4. Create credentials (OAuth 2.0 client ID)
+5. Download the credentials JSON file
+
 ### Backend Environment Variables
 
-Create a `.env` file in the `backend` directory with the following variables:
+Create a `.env` file in the `backend` directory by copying the example:
 
 ```bash
-# Database
+cd backend
+cp .env.example .env
+```
+
+Then edit `.env` with your values:
+
+```bash
+# ============================================
+# REQUIRED SETTINGS
+# ============================================
+
+# Database - PostgreSQL connection (Docker handles this)
 DATABASE_URL=postgresql://ocr_bank_user:ocr_bank_password@localhost:5432/ocr_bank
 
-# OCR
-OCR_LANGUAGE=th
-OCR_DEVICE=cpu
+# LLM API Key - Get from https://makersuite.google.com/app/apikey
+GEMINI_API_KEY=your_actual_gemini_api_key_here
 
-# LLM (Required for chatbot)
-GEMINI_API_KEY=your_gemini_api_key_here
+# LLM Provider - Options: gemini, groq, local
 LLM_PROVIDER=gemini
 
-# Vector Store
+# ============================================
+# OPTIONAL SETTINGS
+# ============================================
+
+# OCR Configuration
+OCR_LANGUAGE=th              # Language: th (Thai), en (English)
+OCR_DEVICE=cpu              # Device: cpu or gpu (requires CUDA)
+
+# Alternative LLM - Groq
+# GROQ_API_KEY=your_groq_api_key_here
+
+# Local LLM - LM Studio or compatible
+# LOCAL_LLM_URL=http://localhost:1234/v1
+
+# Vector Store - For RAG/Chatbot
 CHROMADB_PERSIST_DIRECTORY=./data/chromadb
 
-# Google Sheets (Optional)
-GOOGLE_SHEETS_CREDENTIALS_PATH=./config/credentials.json
-GOOGLE_SHEETS_SPREADSHEET_ID=your_spreadsheet_id_here
+# Google Sheets Integration (Optional)
+# GOOGLE_SHEETS_CREDENTIALS_PATH=./config/credentials.json
+# GOOGLE_SHEETS_SPREADSHEET_ID=your_spreadsheet_id_here
 
 # File Storage
 IMAGE_STORAGE_PATH=./images
-MAX_UPLOAD_SIZE=10485760
+MAX_UPLOAD_SIZE=10485760     # 10MB in bytes
 ```
+
+**Quick Start Minimum:**
+- For basic OCR functionality, you just need: `GEMINI_API_KEY`
+- Everything else can use defaults
 
 ### Frontend Environment Variables
 
 Create a `.env` file in the `frontend` directory:
 
 ```bash
+cd frontend
+cp .env.example .env
+```
+
+The default values work for local development:
+```bash
 VITE_API_BASE_URL=http://localhost:8000/api
 ```
+
+**Production:** Change to your deployed backend URL:
+```bash
+VITE_API_BASE_URL=https://your-backend-url.com/api
+```
+
+### .env File Security
+
+⚠️ **IMPORTANT:** Never commit `.env` files to git!
+
+The `.gitignore` is configured to exclude:
+- `.env` files
+- `backend/config/credentials.json`
+- Any API keys or secrets
+
+**Best practices:**
+- Use different API keys for development and production
+- Rotate keys regularly
+- Never share `.env` files
+- Use environment-specific files like `.env.production`
 
 ## 📖 API Documentation
 
