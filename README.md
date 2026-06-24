@@ -9,7 +9,7 @@ A full-stack web application for automated mobile bank receipt processing using 
 
 ## 🚀 Features
 
-- **📷 Smart OCR Processing** - Extract text from Thai bank receipts using PaddleOCR with multi-language support
+- **📷 Smart OCR Processing** - Extract text from Thai bank receipts using Tesseract OCR with multi-language support
 - **✍️ Review Interface** - User-friendly interface to view, edit, and validate OCR results before saving
 - **📦 Batch Upload** - Process multiple receipts simultaneously for efficient workflow
 - **💾 Persistent Storage** - Store receipts in PostgreSQL with full CRUD operations
@@ -23,7 +23,7 @@ A full-stack web application for automated mobile bank receipt processing using 
 - **Framework**: FastAPI - Modern, fast Python web framework
 - **Database**: PostgreSQL with SQLAlchemy ORM
 - **Migrations**: Alembic for database version control
-- **OCR**: PaddleOCR (Thai language optimized)
+- **OCR**: Tesseract OCR (Thai language optimized)
 - **Vector Store**: ChromaDB for semantic search
 - **LLM**: Google Generative AI (Gemini) / Groq / Local LM Studio support
 - **Integration**: Google Sheets API
@@ -296,7 +296,7 @@ ocr-bank/
 │   │   ├── models/                 # SQLAlchemy database models
 │   │   ├── schemas/                # Pydantic validation schemas
 │   │   ├── services/               # Business logic layer
-│   │   │   ├── ocr_service.py      # PaddleOCR wrapper
+│   │   │   ├── ocr_service.py      # Tesseract OCR wrapper
 │   │   │   ├── rag_service.py      # RAG implementation
 │   │   │   └── export_service.py   # Google Sheets integration
 │   │   └── database/               # Database configuration
@@ -380,9 +380,9 @@ docker compose logs postgres
 ### PaddleOCR Issues
 
 ```bash
-# PaddleOCR downloads models on first run
+# Tesseract OCR downloads models on first run
 # Make sure you have internet connection
-# Models are cached in ~/.paddleocr/
+# Models are cached in ~/.PaddleOCR/
 
 # For GPU support, install CUDA and set OCR_DEVICE=gpu in .env
 ```
@@ -404,20 +404,6 @@ lsof -i :8000
 kill -9 <PID>
 ```
 
-## 🗺️ Roadmap
-
-- ✅ Backend FastAPI project structure
-- ✅ PostgreSQL database setup
-- ✅ PaddleOCR service with Thai support
-- ✅ Upload and receipt API endpoints
-- ✅ React + TypeScript frontend setup
-- 🚧 Upload page with drag-and-drop
-- 🚧 Review page with image viewer
-- 🚧 Receipt list page
-- 📋 RAG service with LLM interface
-- 📋 Chatbot interface
-- 📋 Google Sheets export
-- 📋 Analytics dashboard
 
 ## 🤝 Contributing
 
@@ -437,23 +423,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Your Name**
-- Portfolio: [Your Portfolio Link]
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn]
+**Shalom Inchoi**
 
-## 🙏 Acknowledgments
-
-- [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) for excellent OCR capabilities
-- [FastAPI](https://fastapi.tiangolo.com/) for the amazing web framework
-- [ChromaDB](https://www.trychroma.com/) for the vector database
-- [Google Generative AI](https://ai.google.dev/) for LLM capabilities
-
-## 📞 Support
-
-If you have any questions or need help, please:
-- Open an issue on GitHub
-- Contact: your.email@example.com
 
 <!-- BADGE LINKS -->
 
