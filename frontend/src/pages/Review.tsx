@@ -263,7 +263,7 @@ export default function ReviewPage() {
           <div className="relative bg-gray-100 rounded-lg overflow-hidden">
             <img
               ref={imageRef}
-              src={`http://localhost:8000${currentReceipt.image_path.replace('./backend/images', '/images')}`}
+              src={`http://localhost:8000${currentReceipt.image_path.replace('./images/', '/images/')}`}
               alt={currentReceipt.filename}
               className="w-full h-auto"
               onLoad={handleImageLoad}

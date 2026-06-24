@@ -16,6 +16,7 @@ opencv-python>=4.9.0.80
 paddleocr>=2.7.0
 paddlepaddle>=2.6.0
 pyyaml>=6.0.1
+pytesseract>=0.3.10
 
 # Local LLM (for LM Studio)
 openai>=1.0.0
@@ -24,6 +25,7 @@ openai>=1.0.0
 google-generativeai>=0.3.2
 chromadb==0.4.22
 groq>=0.11.0
+sentence-transformers>=5.0.0
 
 # Google Sheets
 google-api-python-client>=2.116.0

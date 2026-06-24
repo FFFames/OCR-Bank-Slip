@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     vlm_provider: Literal["groq", "lm_studio", "gemini"] = "groq"
 
     # OCR Engine
-    ocr_engine: Literal["tesseract", "paddleocr"] = "paddleocr"
+    ocr_engine: Literal["tesseract", "paddleocr"] = "tesseract"
 
     # VLM Fallback
     vlm_fallback_enabled: bool = True
