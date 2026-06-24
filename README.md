@@ -44,7 +44,7 @@ A full-stack web application for automated mobile bank receipt processing using 
 <!-- Add screenshots here when available -->
 <img width="1496" height="825" alt="image" src="https://github.com/user-attachments/assets/34488525-230a-481b-ac17-12d39ce1bc7a" />
 <img width="1478" height="826" alt="image" src="https://github.com/user-attachments/assets/d93a5dbc-3d14-4afe-9d98-4a83c8fd2e3a" />
-<img width="1280" height="743" alt="image" src="https://github.com/user-attachments/assets/9ca6a745-1c9e-4c19-99ba-b119130c916b" />
+<img width="2560" height="1486" alt="85EF8493-7126-43B3-A5CF-9B5E654D08B1_1_201_a" src="https://github.com/user-attachments/assets/ccf2c4ea-cbd4-48e2-be45-624a7278b11f" />
 <img width="1494" height="601" alt="image" src="https://github.com/user-attachments/assets/ff3544f4-895c-412c-a8a5-edf62c690bbd" />
 <img width="1270" height="619" alt="image" src="https://github.com/user-attachments/assets/d774bd4b-054c-4bbf-babf-4f181bd31440" />
 <img width="1491" height="756" alt="image" src="https://github.com/user-attachments/assets/6382447d-a54a-48e3-95e2-24d0f78c3586" />
